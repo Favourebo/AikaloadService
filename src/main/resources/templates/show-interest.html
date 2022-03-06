@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Show Interest</title>
+
+    <!-- MDB icon -->
+    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+
+    <!-- Material Design Bootstrap -->
+    <link rel="stylesheet" th:href="@{/css/mdb.css}">
+
+
+</head>
+
+<body th:style="'background: url(/img/truck-2138974_1920.jpg);'">
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <br><br>
+            <div class="card">
+
+                <h5 class="card-header info-color white-text text-center py-4" style="color:black !important; background:#fff !important">
+                    <img src="https://www.aikaloads.com/images/LOGO.png" /> <br><br>
+                    <strong>Show Interest</strong>
+                </h5>
+
+                <!--Card content-->
+                <div class="card-body px-lg-5">
+
+                    <!-- Form -->
+                    <form class="text-center"  id="showInterestForm" style="color: #757575;" action="#!">
+
+                        <p style="font-size:1.0rem !important;color:red" id="response"></p>
+                        <p style="font-size:1.0rem !important;color:green" id="success"></p>
+                        <p  style="font-size:0.9rem !important">Kindly fill in below details to indicate interest in job.</p>
+
+                        <!-- Job Summary -->
+                        <div class="md-form mt-3">
+                            <input type="text" id="materialSubscriptionFormText" class="form-control"  th:value="*{jobSummary}" disabled="disabled" >
+                            <input type="text" id="materialSubscriptionFormText" class="form-control" name="encryptedRequest" th:value="*{hiddenReq}" hidden="hidden" >
+                            <label for="materialSubscriptionFormText" style="font-size:0.9rem !important">Job Summary</label>
+                        </div>
+
+                        <!-- Pick Up Address -->
+                        <div class="md-form mt-3">
+                            <input type="text" id="materialSubscriptionFormText" class="form-control" th:value="*{pickUpAddress}" disabled="disabled">
+                            <label for="materialSubscriptionFormText" style="font-size:0.9rem !important" >Pick Up Address</label>
+                        </div>
+
+                        <!-- Delivery Address -->
+                        <div class="md-form mt-3">
+                            <input type="text" id="materialSubscriptionFormText" class="form-control" th:value="*{deliveryAddress}" disabled="disabled">
+                            <label for="materialSubscriptionFormText" style="font-size:0.9rem !important" >Delivery Address</label>
+                        </div>
+
+                        <!-- Offer Amount -->
+                        <div class="md-form mt-3">
+                            <input type="text" id="materialSubscriptionFormText" name="offerAmount" class="form-control">
+                            <label for="materialSubscriptionFormText" style="font-size:0.9rem !important">Offer Amount</label>
+                        </div>
+
+                        <!-- Number OF Trucks-->
+                        <div class="md-form">
+                            <input type="text" id="materialSubscriptionFormText" name="numOfTrucks" class="form-control">
+                            <label for="materialSubscriptionFormText" style="font-size:0.9rem !important">Number Of Truck(s)</label>
+                        </div>
+
+                        <!-- Expected Delivery Date-->
+                        <div class="md-form">
+                            <input type="text" id="materialSubscriptionFormText" name="expectedDeliveryDays" class="form-control">
+                            <label for="materialSubscriptionFormText" style="font-size:0.9rem !important">Expected Delivery Day(s)</label>
+                        </div>
+
+                        <div id="xLoadCategoryLoader" style="display:none">
+                            <img th:src="@{/img/inprogress.gif}" height="40px" width="40px" />
+                        </div>
+
+                        <!-- Send button -->
+                        <button class="btn btn-info btn-block" style="background:#00B050 !important"  type="button" onclick="showInterest()">Send</button>
+
+                    </form>
+                    <!-- Form -->
+                    <hr>
+                    <p style="font-size:0.8rem">AIKALOADS <br> AikaLoads, 11 Eru Ifa Street Elegunshi, <br>Lekki Phase 1, Lagos, Nigeria <br> admin@aikaloads.com</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+<!-- Default form subscription -->
+<!-- End your project here-->
+
+<!-- jQuery -->
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
+
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+
+<!-- MDB core JavaScript -->
+<script type="text/javascript" th:src="@{/js/mdb.min.js}"></script>
+
+<script type="text/javascript" th:src="@{/js/Utility.js}"></script>
+
+<!-- Your custom scripts (optional) -->
+<script type="text/javascript">
+
+ function showInterest(){
+     var formData = buildJsonFromFormData("#showInterestForm");
+
+      var jsonData = JSON.parse(formData);
+
+      //Validate offerAmount
+      var offerAmount = jsonData.offerAmount;
+
+     if(isNaN(parseFloat(offerAmount))) {
+         document.getElementById("response").innerHTML = "Please enter Numeric value for Offer Amount";
+         return;
+      }
+
+
+     //Validate truckNum
+     var numOfTrucks = jsonData.numOfTrucks;
+      if(isNaN(parseInt(numOfTrucks))) {
+         document.getElementById("response").innerHTML = "Please enter Numeric value for Number of Truck(s)";
+         return;
+     }
+
+     makePostRequest("/job/show-interest",formData,"#xLoadCategoryLoader",function(response){
+        // console.log(response);
+         if(response.responseCode === "00"){
+             document.getElementById("success").innerHTML = "You have successfully indicated interest in this job, you will be redirected in 5 seconds to login page!";
+             document.getElementById("response").innerHTML = "";
+             setTimeout(function(){ window.location.assign("https://aikaload-19188.firebaseapp.com/login.html")}, 5000);
+         }
+      });
+ }
+</script>
+
+</body>
+</html>
