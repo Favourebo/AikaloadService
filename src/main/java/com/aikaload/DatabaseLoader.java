@@ -250,7 +250,7 @@ public class DatabaseLoader implements CommandLineRunner {
     @Override
     public void run(String... args){
         //populate database
-        // populateDb();
+        populateDb();
     }
 
     public static void main(String args[]){
