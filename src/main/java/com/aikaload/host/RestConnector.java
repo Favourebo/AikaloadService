@@ -49,6 +49,7 @@ public class RestConnector {
 
             //Setup Rest template
             RestTemplate restTemplate = new RestTemplate();
+            log.info("<<<<<<<POST URL:{}", url);
 
             //Send request with POST method, and Headers.
             ResponseEntity<String> responseFromServer = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
