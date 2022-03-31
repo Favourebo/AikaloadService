@@ -220,6 +220,8 @@ public class DatabaseLoader implements CommandLineRunner {
             oauthClientDetailsRepo.save(oauthClientDetails);*/
 
             //======For UI (prod)
+          /**  List<OauthClientDetails> oauthClientDetailsList = oauthClientDetailsRepo.findAll();
+            if(oauthClientDetailsList.isEmpty()){
             OauthClientDetails oauthClientDetails = new OauthClientDetails();
             oauthClientDetails.setClientId("ui-34783822");
             oauthClientDetails.setClientSecret(bCryptPasswordEncoder.encode("538mdue832"));
@@ -244,13 +246,13 @@ public class DatabaseLoader implements CommandLineRunner {
             oauthClientDetails2.setResourceIds("api");
             oauthClientDetails2.setScope("read,write");
             oauthClientDetailsRepo.save(oauthClientDetails2);
-       // }
+        }**/
     }
 
     @Override
     public void run(String... args){
         //populate database
-        populateDb();
+     //   populateDb();
     }
 
     public static void main(String args[]){
