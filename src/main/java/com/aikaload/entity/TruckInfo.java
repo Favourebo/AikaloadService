@@ -52,4 +52,7 @@ public class TruckInfo {
     @Column(name="is_verified")
     private boolean isVerified;
 
+    @Column(name="description")
+    private String description;
+
 }

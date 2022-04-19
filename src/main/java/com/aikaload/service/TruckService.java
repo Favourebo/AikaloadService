@@ -78,6 +78,7 @@ public class TruckService {
         truckInfo.setPlateNumber(truckRequest.getPlateNumber());
         truckInfo.setCreatedDate(new Date());
         truckInfo.setTruckStatus(TruckEnum.AVAILABLE.getCode());
+        truckInfo.setDescription(truckRequest.getDescription());
 
         //Get UserAccount information for the Id sent
         Optional<UserAccount> createdBy = userAccountRepo.findById(truckRequest.getCreatedBy());

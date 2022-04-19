@@ -16,4 +16,5 @@ public class TruckRequest {
     private int truckStatus;
     private String[] truckPictures;
     private Long createdBy;
+    private String description;
 }
