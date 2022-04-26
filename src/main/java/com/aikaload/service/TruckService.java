@@ -79,6 +79,11 @@ public class TruckService {
         truckInfo.setCreatedDate(new Date());
         truckInfo.setTruckStatus(TruckEnum.AVAILABLE.getCode());
         truckInfo.setDescription(truckRequest.getDescription());
+        truckInfo.setTruckName(truckRequest.getTruckName());
+        truckInfo.setLocation(truckRequest.getLocation());
+        truckInfo.setTruckSize(truckRequest.getTruckSize());
+        truckInfo.setTransmission(truckRequest.getTransmission().name());
+        truckInfo.setAirConditionerAvailable(truckRequest.isAirConditionerAvailable());
 
         //Get UserAccount information for the Id sent
         Optional<UserAccount> createdBy = userAccountRepo.findById(truckRequest.getCreatedBy());
@@ -88,12 +93,12 @@ public class TruckService {
         truckInfo.setUserAccount(createdBy.get());
         TruckInfo createdTruckInfo = truckInfoRepo.save(truckInfo);
 
-        if(truckRequest.getTruckPictures() != null || truckRequest.getTruckPictures().length > 0) {
+        if(truckRequest.getTruckVideos() != null || truckRequest.getTruckVideos().length > 0) {
             //Create Truck Images
-            for (String truckPictures : truckRequest.getTruckPictures()) {
+            for (String truckVideos: truckRequest.getTruckVideos()) {
                 TruckImages truckImages = new TruckImages();
                 truckImages.setTruckInfo(createdTruckInfo);
-                truckImages.setTruckImageUrl(truckPictures);
+                truckImages.setTruckImageUrl(truckVideos);
                 truckImagesRepo.save(truckImages);
             }
         }
@@ -158,6 +163,16 @@ public class TruckService {
             if(editRequest.getVerificationStatus().equalsIgnoreCase("false")) editTruckInfo.get().setVerified(false);
         }
 
+
+        if(StringUtils.isNotEmpty(editRequest.getDescription())) editTruckInfo.get().setDescription(editRequest.getDescription());
+        if(StringUtils.isNotEmpty(editRequest.getTruckName())) editTruckInfo.get().setTruckName(editRequest.getTruckName());
+        if(StringUtils.isNotEmpty(editRequest.getLocation())) editTruckInfo.get().setLocation(editRequest.getLocation());
+        if(StringUtils.isNotEmpty(editRequest.getTruckSize())) editTruckInfo.get().setTruckSize(editRequest.getTruckSize());
+        editTruckInfo.get().setTransmission(editRequest.getTransmission().name());
+        editTruckInfo.get().setAirConditionerAvailable(editRequest.isAirConditionerAvailable());
+
+
+
         editTruckInfo.get().setLastModifiedDate(new Date());
 
         if(editRequest.getTruckStatus() == TruckEnum.UNAVAILABLE.getCode() || editRequest.getTruckStatus() == TruckEnum.AVAILABLE.getCode() || editRequest.getTruckStatus() == TruckEnum.REMOVED.getCode())
@@ -165,12 +180,12 @@ public class TruckService {
 
         TruckInfo savedTruckInfo = truckInfoRepo.save(editTruckInfo.get());
 
-        if(editRequest.getTruckPictures() != null || editRequest.getTruckPictures().length > 0) {
+        if(editRequest.getTruckVideos() != null || editRequest.getTruckVideos().length > 0) {
             //Delete current images in the database
              truckImagesRepo.deleteByTruckInfo(savedTruckInfo);
 
              //Edit Truck Images
-            for (String truckPictures : editRequest.getTruckPictures()) {
+            for (String truckPictures : editRequest.getTruckVideos()) {
                 TruckImages truckImages = new TruckImages();
                 truckImages.setTruckInfo(savedTruckInfo);
                 truckImages.setTruckImageUrl(truckPictures);

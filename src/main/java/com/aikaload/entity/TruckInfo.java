@@ -1,5 +1,6 @@
 package com.aikaload.entity;
 
+import com.aikaload.enums.TransmissionEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import javax.persistence.*;
@@ -54,5 +55,21 @@ public class TruckInfo {
 
     @Column(name="description")
     private String description;
+
+    @Column(name="truck_name")
+    private String truckName;
+
+    @Column(name="location")
+    private String location;
+
+    @Column(name="truck_size")
+    private String truckSize;
+
+    @Column(name="transmission_type")
+    private String transmission;
+
+
+    @Column(name="is_airconditioner_available")
+    private boolean isAirConditionerAvailable;
 
 }
