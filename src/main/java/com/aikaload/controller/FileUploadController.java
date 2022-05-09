@@ -26,7 +26,11 @@ public class FileUploadController {
 
     @PostMapping(value="/get-link",  consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> getUrl(@RequestParam("file") MultipartFile  file) throws IOException {
-        return ResponseEntity.ok().body(cloudinaryService.uploadVideo(file));
+        CloudinaryService.CloudinaryResponse rsp = cloudinaryService.uploadMedia(file);
+        if(rsp.getCode().equals("000")){
+            return ResponseEntity.ok().body(rsp.getUrl());
+        }
+        return ResponseEntity.badRequest().body(rsp.getMessage());
     }
 
 }
