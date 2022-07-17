@@ -23,4 +23,6 @@ public class TruckRequest {
     private String truckSize;
     private TransmissionEnum transmission;
     private boolean isAirConditionerAvailable;
+    private String longitude;
+    private String latitude;
 }

@@ -72,4 +72,8 @@ public class TruckInfo {
     @Column(name="is_airconditioner_available")
     private boolean isAirConditionerAvailable;
 
+    private String longitude;
+
+    private String latitude;
+
 }
