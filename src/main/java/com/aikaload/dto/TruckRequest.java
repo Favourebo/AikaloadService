@@ -25,4 +25,5 @@ public class TruckRequest {
     private boolean isAirConditionerAvailable;
     private String longitude;
     private String latitude;
+    private String address;
 }

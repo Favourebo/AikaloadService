@@ -76,4 +76,6 @@ public class TruckInfo {
 
     private String latitude;
 
+    private String address;
+
 }

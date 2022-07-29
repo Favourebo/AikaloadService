@@ -86,6 +86,7 @@ public class TruckService {
         truckInfo.setAirConditionerAvailable(truckRequest.isAirConditionerAvailable());
         truckInfo.setLongitude(truckRequest.getLongitude());
         truckInfo.setLatitude(truckRequest.getLatitude());
+        truckInfo.setAddress(truckRequest.getAddress());
 
         //Get UserAccount information for the Id sent
         Optional<UserAccount> createdBy = userAccountRepo.findById(truckRequest.getCreatedBy());
@@ -172,6 +173,7 @@ public class TruckService {
         if(StringUtils.isNotEmpty(editRequest.getTruckSize())) editTruckInfo.get().setTruckSize(editRequest.getTruckSize());
         if(StringUtils.isNotEmpty(editRequest.getLongitude())) editTruckInfo.get().setLongitude(editRequest.getLongitude());
         if(StringUtils.isNotEmpty(editRequest.getLatitude())) editTruckInfo.get().setLatitude(editRequest.getLatitude());
+        if(StringUtils.isNotEmpty(editRequest.getAddress())) editTruckInfo.get().setAddress(editRequest.getAddress());
         editTruckInfo.get().setTransmission(editRequest.getTransmission().name());
         editTruckInfo.get().setAirConditionerAvailable(editRequest.isAirConditionerAvailable());
 
