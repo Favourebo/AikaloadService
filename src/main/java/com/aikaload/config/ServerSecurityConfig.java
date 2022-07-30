@@ -49,7 +49,7 @@ public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
 //Manages security
     @Override
     public void configure(WebSecurity security){
-        security.ignoring().antMatchers("/bootstrap/**","/truck/get-trucks","/twilio/pre-web-hook-w1234ft","/job/show-interest","/auth/token","/v2/api-docs","/swagger-ui.html","/webjars/**","/swagger-resources/**","/css/**","/asset/**","/js/**","/img/**","/font-awesome/**", "/fonts/**","/assets/**","/layerslider/**","/upload/**");
+        security.ignoring().antMatchers("/bootstrap/**","/twilio/pre-web-hook-w1234ft","/job/show-interest","/auth/token","/v2/api-docs","/swagger-ui.html","/webjars/**","/swagger-resources/**","/css/**","/asset/**","/js/**","/img/**","/font-awesome/**", "/fonts/**","/assets/**","/layerslider/**","/upload/**","/get-trucks","/error");
     }
 
     @Override
