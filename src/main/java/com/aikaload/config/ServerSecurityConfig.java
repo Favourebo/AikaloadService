@@ -60,7 +60,6 @@ public class ServerSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/auth/token").permitAll()
                 .antMatchers("/truck/get-trucks").permitAll()
-                .antMatchers("/api/**").authenticated()
                 .anyRequest().authenticated();
                 //.and().exceptionHandling().authenticationEntryPoint(customAuthenticationEntryPoint).accessDeniedHandler(new CustomAccessDeniedHandler());
     }
